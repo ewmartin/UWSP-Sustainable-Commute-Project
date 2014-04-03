@@ -4,11 +4,10 @@
 ## Customize your APP title, subtitle and menus here
 #########################################################################
 
-
 response.subtitle = T('UWSP Sustainable Commute Project')
 response.title = response.subtitle
 #http://dev.w3.org/html5/markup/meta.name.html
-response.meta.author = 'Sam Bolgert'
+response.meta.author = 'David Zhang'
 response.meta.description = 'Free and open source full-stack enterprise framework for agile development of fast, scalable, secure and portable database-driven web-based applications. Written and programmable in Python'
 response.meta.keywords = 'uwsp, commute, sustainability'
 response.meta.generator = 'UWSP Sustainable Commute'
@@ -21,16 +20,32 @@ response.meta.copyright = 'Copyright 2011'
 ##########################################
 
 response.menu = [
-    (T('HOME'), False, URL('default','index'), []),
-    (T('ABOUT v'), False,URL('default','index'),[
-        (T('LATEST NEWS'),False,URL('info','news'),[]),
-        (T('PEOPLE'),False,URL('info','people'),[]),
-        (T('FUNDING'),False,URL('info','funding'),[])]),
-    (T("PROJECT OUTCOMES v"),False,URL('default','index'),[
-        (T('GRAPHS AND CHARTS'),False,URL('info','gallery'),[])]),        
-    (T("COMMUTING SURVEY"),False,URL('survey','index'),[]),
-    (T("BUS OPTIONS"),False,URL('map_widget','index'),[])
-    ]
+    (T('HOME'), False, URL('default', 'index'), []),
+    (T('ABOUT v'), False, URL('default', 'index'), 
+        [
+            (T('PEOPLE'), False, URL('info', 'people'), []),
+            (T('FUNDING'), False, URL('info', 'funding'), []),
+            (T('LATEST NEWS'), False, URL('info', 'news'), []),
+        ]
+    ),
+    (T("PROJECT OUTCOMES v"), False, URL('default', 'index'), 
+        [
+            (T('REPORTS'), False, URL('info', 'report'), []),
+            (T('MAPS AND GRAPHS'), False,URL('info', 'gallery'), []),
+        ]
+    ),
+    (T("LIBRARY"), False, URL('default', 'index'), []),
+    (T("TAKE THE SURVEY"), False, URL('survey', 'index'), []),
+    (T("CHOICES"), False, URL('default', 'index'), 
+        [
+            (T('WALK'), False, URL('map_widget', 'walk'), []),
+            (T('BIKE'), False, URL('map_widget', 'bike'), []),
+            (T('AUTO'), False, URL('map_widget', 'auto'), []),
+            (T('RIDESHARE'), False, URL('map_widget', 'rideshare'), []),
+            (T('BUS'), False, URL('map_widget', 'bus'), []),
+        ]
+    )
+]
 
 ##########################################
 ## this is here to provide shortcuts

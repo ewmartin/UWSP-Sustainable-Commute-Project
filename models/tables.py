@@ -1,10 +1,12 @@
 import datetime
+
 db.define_table('articles',
-                    Field('author',db.auth_user),
+                    Field('author', db.auth_user),
                     Field('title','text'),                
                     Field('published','date',default=datetime.datetime.now()),
                     Field('bodytext','text'))
-db.articles.author.requires = IS_IN_DB(db,'auth_user.id','auth_user.first_name')
+
+db.articles.author.requires = IS_IN_DB(db, 'auth_user.id', 'auth_user.first_name')
 db.articles.bodytext.requires = IS_NOT_EMPTY()
 db.articles.title.requires = IS_NOT_EMPTY()
 
@@ -42,6 +44,7 @@ db.define_table('user_data_raw',
                     Field('lzip'),
                     Field('lphone'),
                     Field('miles'))
+
 db.define_table('response_user',
                     Field('first_name'),
                     Field('last_name'),
@@ -49,10 +52,10 @@ db.define_table('response_user',
                     Field('address'),
                     Field('city'),
                     Field('zip'),
-                    Field('state'))
+                    Field('ustate'))
 db.response_user.email.requires = IS_NOT_IN_DB(db, 'response_user.email', error_message='Email already used!')
 db.define_table('uwsp_user',
-                Field('user',db.response_user),
+                Field('ruser', db.response_user),
                 Field('uwsp_id'),
                 Field('uwsp_status'),
                 Field('uwsp_years'),
@@ -73,6 +76,7 @@ db.define_table('question',
 #inialize response table
 db.define_table('response',
                 Field('response_to',db.question),
-                Field('user',db.response_user),
+                Field('ruser', db.response_user),
                 Field('answer','text'),
-                Field('timestamp','datetime', default = datetime.datetime.now()))
+                Field('res_time', 'datetime', default = datetime.datetime.now()))
+
