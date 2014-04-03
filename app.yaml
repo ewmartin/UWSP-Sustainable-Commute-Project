@@ -3,45 +3,50 @@
 #  See http://code.google.com/appengine/docs/python/config/appconfig.html
 #  and http://web2py.com/book/default/chapter/11?search=app.yaml
 
-application: uwspcommute
+application: uwspcommute-david
 version: 1
 api_version: 1
-runtime: python
 
-default_expiration: "24h"
+# use this line for Python 2.5
+#
+#runtime: python
 
-derived_file_type:
-- python_precompiled
+# use these lines for Python 2.7
+# upload app with: appcfg.py update web2py (where 'web2py' is web2py's root directory)
+#
+runtime: python27
+threadsafe: true    # true for WSGI & concurrent requests (Python 2.7 only)
+
+default_expiration: "24h"   # for static files
 
 handlers:
 
-- url: /_ah/stats.*
-  script: $PYTHON_LIB/google/appengine/ext/appstats/ui.py
-  login: admin
+# Warning! Static mapping - below - isn't compatible with 
+# the parametric router's language logic. 
+# You cannot use them together.
 
-- url: /(?P<a>.+?)/static/(?P<b>.+)
+- url: /(.+?)/static/_\d.\d.\d\/(.+)
+  static_files: applications/\1/static/\2
+  upload: applications/(.+?)/static/(.+)
+  secure: optional
+  expiration: "365d"
+
+- url: /(.+?)/static/(.+)
   static_files: applications/\1/static/\2
   upload: applications/(.+?)/static/(.+)
   secure: optional
 
 - url: /favicon.ico
-  static_files: applications/uwspcommute/static/favicon.ico
-  upload: applications/uwspcommute/static/favicon.ico
+  static_files: applications/uwsp/static/favicon.ico
+  upload: applications/uwsp/static/favicon.ico
 
 - url: /robots.txt
-  static_files: applications/uwspcommute/static/robots.txt
-  upload: applications/uwspcommute/static/robots.txt
-
-- url: /_ah/admin/.*
-  script: $PYTHON_LIB/google/appengine/ext/admin
-  login: admin
-
-- url: /_ah/queue/default
-  script: gaehandler.py
-  login: admin
+  static_files: applications/uwsp/static/robots.txt
+  upload: applications/uwsp/static/robots.txt
 
 - url: .*
-  script: gaehandler.py
+  #script: gaehandler.py         # CGI
+  script: gaehandler.wsgiapp    # WSGI (Python 2.7 only)
   secure: optional
 
 admin_console:
@@ -60,8 +65,8 @@ skip_files: |
  (.*\.py[co])|
  (.*/RCS/.*)|
  (\..*)|
- (applications/(admin|examples)/.*)|
- ((admin|examples|welcome)\.(w2p|tar))|
+ (applications/examples/.*)|
+ ((examples|uwsp)\.(w2p|tar))|
  (applications/.*?/(cron|databases|errors|cache|sessions)/.*)|
  ((logs|scripts)/.*)|
  (anyserver\.py)|
@@ -76,7 +81,7 @@ skip_files: |
  (parameters_\d+\.py)|
  (options_std.py)|
  (gluon/tests/.*)|
- (gluon/(rocket|winservice)\.py)|
+ (gluon/rocket\.py)|
  (contrib/(gateways|markdown|memcache|pymysql)/.*)|
  (contrib/(populate|taskbar_widget)\.py)|
  (google_appengine/.*)|
@@ -85,4 +90,6 @@ skip_files: |
 
 builtins:
 - remote_api: on
-- datastore_admin: on
+- appstats: on
+- admin_redirect: on
+- deferred: on
