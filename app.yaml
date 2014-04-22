@@ -3,8 +3,8 @@
 #  See http://code.google.com/appengine/docs/python/config/appconfig.html
 #  and http://web2py.com/book/default/chapter/11?search=app.yaml
 
-application: uwspcommute-david
-version: 1
+application: uwspcommute
+version: 4
 api_version: 1
 
 # use this line for Python 2.5

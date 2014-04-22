@@ -12,9 +12,8 @@ def index():
     DIV(LABEL('Years at UWSP:',_class='hlabel',_for='uwyears'),INPUT(_name='uwyears',_class='styledinput surveyinput',_id='uwyears',requires=IS_NOT_EMPTY()),_class='surveyrow'),
     DIV(INPUT(_type='submit',_value='start',_class='surveyinput',requires=IS_NOT_EMPTY()),_class='surveyrow'),_formname='form1')
     
-    
     #if uwsp form validates
-    if form.accepts(request,session,formname='form1'):
+    if form.accepts(request, session, formname='form1'):
         session.uwspid = form.vars.uwspid
         session.uwstatus = form.vars.uwstatus
         session.uwyears = form.vars.uwyears
@@ -26,7 +25,6 @@ def index():
     return dict(form=form)
 
 def address():
-
     #create address form
     form=FORM(
     DIV(

@@ -47,7 +47,6 @@ response.menu = [[T('design'), False, URL('admin', 'default', 'design',
 # ## auxiliary functions
 # ###########################################################
 
-
 def get_databases(request):
     dbs = {}
     for (key, value) in global_env.items():
@@ -62,7 +61,6 @@ def get_databases(request):
 
 
 databases = get_databases(None)
-
 
 def eval_in_global_env(text):
     exec ('_ret=%s' % text, {}, global_env)

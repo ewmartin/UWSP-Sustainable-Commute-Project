@@ -394,7 +394,6 @@ body {
 	padding: 0px;
 }
 
-
 .nav li {
   float: left;
   margin: 0px;
@@ -585,7 +584,7 @@ body {
         width:600px; 
         height:400px
     }
-    #g_user[
+    #g_user{
 
     }
     #g_footer{

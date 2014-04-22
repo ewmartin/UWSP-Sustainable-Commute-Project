@@ -47,10 +47,10 @@ function initialize_map(){
 }
 function show_kml(id){
     if(id < 10){
-        url = "http://uwspcommute.appspot.com/uwspcommute/static/kml/route_"+id+".kml";
+        url = "/static/kml/route_"+id+".kml";
     }
     else{
-        url = "http://uwspcommute.appspot.com/uwspcommute/static/kml/route_"+id+".kmz";
+        url = "/static/kml/route_"+id+".kmz";
     }
     clearRoute();
     kmlLayer = new google.maps.KmlLayer(url, { map: map });
@@ -178,9 +178,6 @@ function reset(){
                         <a class="routeLink" href="http://stevenspoint.com/DocumentView.aspx?DID=213" title="Stevens Point Bus Routes" target="_blank">Late Night East</a><br /></div>
                     <div class="route_node"><input type="radio" name="route" onclick="refreshRoute(event)" value="1" /> 
                         <a class="routeLink" href="http://stevenspoint.com/DocumentView.aspx?DID=213" title="Stevens Point Bus Routes" target="_blank">Late Night North</a><br /></div>
-                    <!--<div class="route_node"><input type="radio" name="route" onclick="refreshRoute(event)" value="10" /> KMZ test 1<br /></div>
-                    <div class="route_node"><input type="radio" name="route" onclick="refreshRoute(event)" value="11" /> KMZ test 2<br /></div>
-                    <div class="route_node"><input type="radio" name="route" onclick="refreshRoute(event)" value="12" /> KMZ test 3<br /></div>-->
                 </form>
             </div>
             </div>
